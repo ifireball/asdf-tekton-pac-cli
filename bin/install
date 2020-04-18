@@ -15,16 +15,17 @@ install_tkn() {
 
   local download_url="$(get_download_url $version)"
   local tmp_download_dir="$(get_tmp_dir)"
-  local bin_install_path="$install_path/bin"
+  local download_path="${tmp_download_dir}/tkn_${version}.tar.gz"
+  local bin_install_path="${install_path}/bin"
 
-  echo "Downloading Tekton CLI (tkn) from ${download_url} to ${download_path}"
-  curl -s -L "$download_url" -o "$tmp_download_dir}/"
+  echo "Downloading Tekton CLI (tkn) from ${download_url} to ${tmp_download_dir}"
+  curl -s -L "$download_url" -o "${download_path}"
 
   echo "Creating bin directory"
   mkdir -p "${bin_install_path}"
 
   echo "Copying binary"
-  tar -zxvf ${download_path} --directory $tmp_download_dir
+  tar -zxvf ${download_path} --directory ${tmp_download_dir}
   cp ${tmp_download_dir}/tkn ${target_path}
 
 
