@@ -18,7 +18,7 @@ install_tkn() {
   local bin_install_path="$install_path/bin"
 
   echo "Downloading Tekton CLI (tkn) from ${download_url} to ${download_path}"
-  curl -s -L "$download_url" -o "$download_path"
+  curl -s -L "$download_url" -o "$tmp_download_dir}/"
 
   echo "Creating bin directory"
   mkdir -p "${bin_install_path}"
@@ -48,4 +48,4 @@ get_download_url() {
   echo "https://github.com/tektoncd/cli/releases/download/v${version}/tkn_${version}_${platform}_x86_64.tar.gz"
 }
 
-install_kubie $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
+install_tkn $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
