@@ -34,9 +34,9 @@ install_tkn() {
 
 get_tmp_dir() {
   if [ "${TMPDIR}" = "" ]; then
-    return "$(mktemp -d -t tkn_XXXXXX)"
+    echo "$(mktemp -d -t tkn_XXXXXX)"
   fi
-  return "${TMPDIR}"
+  echo "${TMPDIR}"
 }
 
 get_arch() {
