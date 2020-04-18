@@ -25,7 +25,7 @@ install_tkn() {
   mkdir -p "${bin_install_path}"
 
   echo "Copying binary"
-  tar -zxvf ${download_path} --directory ${tmp_download_dir}
+  tar -zxf ${download_path} --directory ${tmp_download_dir}
   cp ${tmp_download_dir}/tkn ${bin_install_path}
 
   chmod +x $bin_install_path
