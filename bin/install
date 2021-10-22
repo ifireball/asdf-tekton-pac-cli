@@ -39,13 +39,22 @@ get_tmp_dir() {
 }
 
 get_arch() {
+  arch=$(uname -m)
+  case $arch in
+    aarch64) arch="arm64";;
+    x86_64) arch="x86_64";;
+  esac
+  echo "$arch"
+}
+get_platform() {
   uname
 }
 
 get_download_url() {
   local version="$1"
-  local platform="$(get_arch)"
-  echo "https://github.com/tektoncd/cli/releases/download/v${version}/tkn_${version}_${platform}_x86_64.tar.gz"
+  local platform="$(get_platform)"
+  local arch="$(get_arch)"
+  echo "https://github.com/tektoncd/cli/releases/download/v${version}/tkn_${version}_${platform}_${arch}.tar.gz"
 }
 
 install_tkn $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
