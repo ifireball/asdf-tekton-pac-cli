@@ -38,23 +38,41 @@ get_tmp_dir() {
   echo "${TMPDIR}"
 }
 
-get_arch() {
-  arch=$(uname -m)
-  case $arch in
-    aarch64) arch="arm64";;
-    x86_64) arch="x86_64";;
-  esac
-  echo "$arch"
+check_version() {
+  # https://stackoverflow.com/a/37939589/445232
+  # https://stackoverflow.com/a/11123849/445232
+  echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }' | sed 's/^0*//';
 }
+
 get_platform() {
   uname
 }
 
+get_arch() {
+  platform=$1
+  version=$2
+
+  # Starting with v0.24.0 the release artifacts for MacOS/Darwin are named "all" instead of a specific arch
+  if [ "$platform" == "Darwin" ] && [ "$(check_version "$version")" -ge "$(check_version "0.24.0")" ]
+  then
+    arch="all"
+  else
+    arch=$(uname -m)
+    case $arch in
+      aarch64) arch="arm64";;
+      x86_64) arch="x86_64";;
+    esac
+  fi
+  echo "$arch"
+}
+
 get_download_url() {
   local version="$1"
-  local platform="$(get_platform)"
-  local arch="$(get_arch)"
+  local platform
+  platform=$(get_platform)
+  local arch
+  arch=$(get_arch "$platform" "$version")
   echo "https://github.com/tektoncd/cli/releases/download/v${version}/tkn_${version}_${platform}_${arch}.tar.gz"
 }
 
-install_tkn $ASDF_INSTALL_TYPE $ASDF_INSTALL_VERSION $ASDF_INSTALL_PATH
+install_tkn "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
