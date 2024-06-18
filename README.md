@@ -1,4 +1,6 @@
-# asdf-tekton-cli [![Build Status](https://travis-ci.com/johnhamelink/asdf-tekton-cli.svg?branch=master)](https://travis-ci.com/johnhamelink/asdf-tekton-cli)
-asdf-vm plugin for [Tekton's CLI tool, tkn][1], a kubernetes-native CI/CD tool.
+# asdf-tekton-pac-cli
+asdf plugin for [Tekton's Pipelines-as-code CLI tool, tkn-pac][1], a 
+Kubernetes [Tekton][2] add-on for managing CI/CD pipelines in Git.
 
-[1]: https://github.com/tektoncd/cli
+[1]: https://pipelinesascode.com/
+[2]: https://tekton.dev/

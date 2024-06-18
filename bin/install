@@ -18,7 +18,7 @@ install_tkn() {
   local download_path="${tmp_download_dir}/tkn_${version}.tar.gz"
   local bin_install_path="${install_path}/bin"
 
-  echo "Downloading Tekton CLI (tkn) from ${download_url} to ${tmp_download_dir}"
+  echo "Downloading Tekton PAC CLI (tkn-pac) from ${download_url} to ${tmp_download_dir}"
   curl -s -L "$download_url" -o "${download_path}"
 
   echo "Creating bin directory"
@@ -72,7 +72,7 @@ get_download_url() {
   platform=$(get_platform)
   local arch
   arch=$(get_arch "$platform" "$version")
-  echo "https://github.com/tektoncd/cli/releases/download/v${version}/tkn_${version}_${platform}_${arch}.tar.gz"
+  echo "https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v${version}/tkn-pac_${version}_${platform}_${arch}.tar.gz"
 }
 
 install_tkn "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
